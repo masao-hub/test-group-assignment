@@ -1,34 +1,26 @@
 // API configuration
 const API_KEY = '18bfa311c68130dc921b372a01377789';
-const BASE_URL = 'test-group-assignment-4xzufmh1f-masao-hubs-projects.vercel.app';
+const BASE_URL = 'https://test-group-assignment-4xzufmh1f-masao-hubs-projects.vercel.app/api';
 // Common headers for API requests
 const headers = {
     'x-apisports-key': API_KEY
 };
 // Fetch top players
-async function fetchTopPlayers(season = 2023, leagueId = 39) {
-    try {
-        console.log("Fetching players..."); 
-        const response = await fetch(`${BASE_URL}/players/topscorers?season=${season}&league=${leagueId}`, {
-            method: 'GET',
-            headers: headers
-        });
-        
-        console.log("API Response:", response);
-        
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error("API Error:", errorData);
-            throw new Error(`API request failed: ${errorData.message || response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log("API Data:", data);
-        return data.response || [];
-    } catch (error) {
-        console.error('Full Error:', error);
-        return [];
-    }
+async function fetchTopPlayers() {
+    // Mock data
+    return [{
+        player: {
+            id: 1,
+            name: "Lionel Messi",
+            photo: "https://example.com/messi.jpg",
+            nationality: "Argentina"
+        },
+        statistics: [{
+            team: { name: "Inter Miami" },
+            games: { position: "Forward" },
+            goals: { total: 10 }
+        }]
+    }];
 }
 
 // Fetch team information
