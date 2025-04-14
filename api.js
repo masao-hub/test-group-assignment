@@ -1,29 +1,35 @@
 // API configuration
-const API_KEY = '84295d246eb4154054a355b0682a3439'; 
+const API_KEY = '84295d246eb4154054a355b0682a3439';
 const BASE_URL = 'https://v3.football.api-sports.io';
 
 // Common headers for API requests
 const headers = {
     'x-apisports-key': API_KEY,
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
 };
-
 // Fetch top players
-async function fetchTopPlayers(season = 2023, leagueId = 39) { // Premier League by default
+async function fetchTopPlayers(season = 2023, leagueId = 39) {
     try {
+        console.log("Fetching players..."); 
         const response = await fetch(`${BASE_URL}/players/topscorers?season=${season}&league=${leagueId}`, {
             method: 'GET',
             headers: headers
         });
         
+        console.log("API Response:", response);
+        
         if (!response.ok) {
-            throw new Error(`API request failed with status ${response.status}`);
+            const errorData = await response.json();
+            console.error("API Error:", errorData);
+            throw new Error(`API request failed: ${errorData.message || response.status}`);
         }
         
         const data = await response.json();
-        return data.response;
+        console.log("API Data:", data);
+        return data.response || [];
     } catch (error) {
-        console.error('Error fetching top players:', error);
+        console.error('Full Error:', error);
         return [];
     }
 }
@@ -53,7 +59,7 @@ async function fetchPlayerInfo(playerId) {
     try {
         const response = await fetch(`${BASE_URL}/players?id=${playerId}&season=2023`, {
             method: 'GET',
-            headers: headers
+            headers: headers 
         });
         
         if (!response.ok) {
