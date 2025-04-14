@@ -1,41 +1,26 @@
-// server.js (for Vercel)
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 
 const app = express();
+app.use(cors());
 
-// Configure CORS properly
-app.use(cors({
-  origin: 'https://masao-hub.github.io',
-  methods: ['GET'],
-  allowedHeaders: ['x-apisports-key']
-}));
-
-const API_KEY = '18bfa311c68130dc921b372a01377789'; // Replace with your actual key
+const API_KEY = '2e13a0f8ec1146e1b362554d6ab97feb'; // Replace with your actual key
 const BASE_URL = 'https://v3.football.api-sports.io';
 
 app.get('/api/*', async (req, res) => {
-  try {
-    const endpoint = req.params[0];
-    const response = await axios.get(`${BASE_URL}/${endpoint}`, {
-      headers: {
-        'x-apisports-key': API_KEY
-      },
-      params: req.query
-    });
-    
-    // Add proper CORS headers to the response
-    res.header('Access-Control-Allow-Origin', 'https://masao-hub.github.io');
-    res.header('Access-Control-Allow-Methods', 'GET');
-    res.json(response.data);
-  } catch (error) {
-    console.error('Proxy error:', error);
-    res.status(error.response?.status || 500).json({ 
-      error: error.message,
-      details: error.response?.data 
-    });
-  }
+    try {
+        const response = await axios.get(`${BASE_URL}/${req.params[0]}`, {
+            headers: {
+                'x-apisports-key': API_KEY
+            },
+            params: req.query
+        });
+        res.json(response.data);
+    } catch (error) {
+        res.status(error.response?.status || 500).json({ error: error.message });
+    }
 });
 
-module.exports = app;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Proxy server running on port ${PORT}`));

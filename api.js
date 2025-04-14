@@ -1,5 +1,5 @@
 // API configuration
-const API_KEY = '18bfa311c68130dc921b372a01377789';
+const API_KEY = '2e13a0f8ec1146e1b362554d6ab97feb';
 const BASE_URL = 'https://test-group-assignment.vercel.app/api';
 // Common headers for API requests
 const headers = {
