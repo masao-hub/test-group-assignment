@@ -1,6 +1,6 @@
 // API configuration
 const API_KEY = '18bfa311c68130dc921b372a01377789';
-const BASE_URL = 'https://v3.football.api-sports.io';
+const BASE_URL = 'https://vercel.com/masao-hubs-projects/test-group-assignment.vercel.app/api'; 
 
 // Common headers for API requests
 const headers = {
