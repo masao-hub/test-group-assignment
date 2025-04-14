@@ -4,9 +4,7 @@ const BASE_URL = 'https://v3.football.api-sports.io';
 
 // Common headers for API requests
 const headers = {
-    'x-apisports-key': API_KEY,
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'x-apisports-key': API_KEY
 };
 // Fetch top players
 async function fetchTopPlayers(season = 2023, leagueId = 39) {
