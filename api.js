@@ -1,5 +1,5 @@
 // API configuration
-const API_KEY = '84295d246eb4154054a355b0682a3439';
+const API_KEY = '18bfa311c68130dc921b372a01377789';
 const BASE_URL = 'https://v3.football.api-sports.io';
 
 // Common headers for API requests
